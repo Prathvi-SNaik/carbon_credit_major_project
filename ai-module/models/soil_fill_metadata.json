@@ -1,0 +1,167 @@
+{
+  "model_name": "RandomForest",
+  "version": "soil-fill-place-v1",
+  "trained_at": "2026-09-25T09:00:34.426694+00:00",
+  "targets": [
+    "ec",
+    "nitrogen",
+    "phosphorus",
+    "potassium",
+    "clay_pct",
+    "sand_pct",
+    "silt_pct",
+    "soc_percent"
+  ],
+  "features_numeric": [
+    "ph",
+    "moisture",
+    "temperature",
+    "latitude",
+    "longitude",
+    "month",
+    "rainfall_mm",
+    "elevation_m",
+    "soil_depth"
+  ],
+  "features_categorical": [
+    "soil_type",
+    "state"
+  ],
+  "n_rows": 8640,
+  "arduino_inputs": [
+    "ph",
+    "moisture",
+    "temperature"
+  ],
+  "place_criteria": [
+    "latitude",
+    "longitude",
+    "state",
+    "soil_type",
+    "month",
+    "rainfall_mm",
+    "elevation_m"
+  ],
+  "training_dataset": "India agro-ecological Monte-Carlo table (NBSS&LUP/ICAR typical ranges + seasonal climate)",
+  "metrics_test": {
+    "model": "RandomForest",
+    "mean_R2": 0.8723036901932193,
+    "per_target": {
+      "ec": {
+        "R2": 0.9781056591078494,
+        "MAE": 0.051884802990433784
+      },
+      "nitrogen": {
+        "R2": 0.9830913388959452,
+        "MAE": 11.445630084800031
+      },
+      "phosphorus": {
+        "R2": 0.8881446711486511,
+        "MAE": 1.7697480755163046
+      },
+      "potassium": {
+        "R2": 0.9887693220910125,
+        "MAE": 9.114959461411575
+      },
+      "clay_pct": {
+        "R2": 0.887118395301587,
+        "MAE": 2.706870249347631
+      },
+      "sand_pct": {
+        "R2": 0.9028555946251589,
+        "MAE": 3.3269731484828897
+      },
+      "silt_pct": {
+        "R2": 0.3732543433305183,
+        "MAE": 4.366687905783488
+      },
+      "soc_percent": {
+        "R2": 0.9770901970450316,
+        "MAE": 0.07610880213322345
+      }
+    }
+  },
+  "model_comparison": [
+    {
+      "model": "RandomForest",
+      "mean_R2": 0.8723036901932193,
+      "per_target": {
+        "ec": {
+          "R2": 0.9781056591078494,
+          "MAE": 0.051884802990433784
+        },
+        "nitrogen": {
+          "R2": 0.9830913388959452,
+          "MAE": 11.445630084800031
+        },
+        "phosphorus": {
+          "R2": 0.8881446711486511,
+          "MAE": 1.7697480755163046
+        },
+        "potassium": {
+          "R2": 0.9887693220910125,
+          "MAE": 9.114959461411575
+        },
+        "clay_pct": {
+          "R2": 0.887118395301587,
+          "MAE": 2.706870249347631
+        },
+        "sand_pct": {
+          "R2": 0.9028555946251589,
+          "MAE": 3.3269731484828897
+        },
+        "silt_pct": {
+          "R2": 0.3732543433305183,
+          "MAE": 4.366687905783488
+        },
+        "soc_percent": {
+          "R2": 0.9770901970450316,
+          "MAE": 0.07610880213322345
+        }
+      }
+    },
+    {
+      "model": "ExtraTrees",
+      "mean_R2": 0.8714014253262612,
+      "per_target": {
+        "ec": {
+          "R2": 0.9843011095574657,
+          "MAE": 0.05056966622210227
+        },
+        "nitrogen": {
+          "R2": 0.9834936664871494,
+          "MAE": 11.309953081548398
+        },
+        "phosphorus": {
+          "R2": 0.8877502083859649,
+          "MAE": 1.76543832515996
+        },
+        "potassium": {
+          "R2": 0.9889327426591984,
+          "MAE": 9.120794392365656
+        },
+        "clay_pct": {
+          "R2": 0.8850813324079366,
+          "MAE": 2.721378277531113
+        },
+        "sand_pct": {
+          "R2": 0.902265522568901,
+          "MAE": 3.3263594426255776
+        },
+        "silt_pct": {
+          "R2": 0.36037649739930366,
+          "MAE": 4.410807265495621
+        },
+        "soc_percent": {
+          "R2": 0.97901032314417,
+          "MAE": 0.07293409551802627
+        }
+      }
+    }
+  ],
+  "notes": [
+    "Arduino measures pH (EC20-BNC), moisture and temperature.",
+    "Remaining properties are predicted for the mapped farm location.",
+    "Not a laboratory soil-test certificate."
+  ]
+}

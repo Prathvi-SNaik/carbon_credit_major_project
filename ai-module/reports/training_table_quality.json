@@ -1,0 +1,210 @@
+{
+  "dataset": "training_table",
+  "label": "REAL DATA",
+  "total_rows": 30881,
+  "total_columns": 39,
+  "missing_values": {
+    "layer_id": 0,
+    "profile_id": 0,
+    "upper_depth": 0,
+    "lower_depth": 0,
+    "country_name": 0,
+    "region": 0,
+    "continent": 0,
+    "latitude": 0,
+    "longitude": 0,
+    "date": 0,
+    "licence": 0,
+    "dataset_id": 0,
+    "orgc_g_kg": 0,
+    "source": 0,
+    "dataset_name": 0,
+    "download_tag": 0,
+    "ph_h2o": 13868,
+    "clay_pct": 13424,
+    "sand_pct": 13390,
+    "silt_pct": 13498,
+    "n_g_kg": 10601,
+    "bulk_density_g_cm3": 27404,
+    "ec_ds_m": 27225,
+    "data_label": 0,
+    "usda_order": 30661,
+    "wrb_group": 30651,
+    "year": 17888,
+    "soc_percent": 0,
+    "depth_mid_cm": 0,
+    "depth_thickness_cm": 0,
+    "is_topsoil": 0,
+    "n_percent": 10601,
+    "cn_ratio": 10605,
+    "texture_sum": 14046,
+    "soil_texture": 14046,
+    "region_group": 0,
+    "karnataka_flag": 0,
+    "target": 0,
+    "original_orgc_field": 0
+  },
+  "duplicates_layer_id": 0,
+  "numerical_ranges": {
+    "layer_id": {
+      "min": 1948.0,
+      "max": 3351313.0,
+      "mean": 259719.67601437776
+    },
+    "profile_id": {
+      "min": 574478.0,
+      "max": 1124767.0,
+      "mean": 592122.1017454098
+    },
+    "upper_depth": {
+      "min": 0.0,
+      "max": 30.0,
+      "mean": 9.263722029727017
+    },
+    "lower_depth": {
+      "min": 1.0,
+      "max": 400.0,
+      "mean": 32.881707198601084
+    },
+    "latitude": {
+      "min": -63.89638096235563,
+      "max": 30.9,
+      "mean": -5.815305810968986
+    },
+    "longitude": {
+      "min": -72.94972222222222,
+      "max": 153.608989355931,
+      "mean": 33.931725674591185
+    },
+    "orgc_g_kg": {
+      "min": 0.1,
+      "max": 468.3,
+      "mean": 12.601740012726271
+    },
+    "ph_h2o": {
+      "min": 3.3,
+      "max": 11.0,
+      "mean": 6.087103979309939
+    },
+    "clay_pct": {
+      "min": 0.0,
+      "max": 93.0,
+      "mean": 27.03972618433866
+    },
+    "sand_pct": {
+      "min": 0.0,
+      "max": 100.0,
+      "mean": 57.000794694414274
+    },
+    "silt_pct": {
+      "min": 0.0,
+      "max": 82.0,
+      "mean": 16.066841166657078
+    },
+    "n_g_kg": {
+      "min": 0.0,
+      "max": 29.4,
+      "mean": 0.9568392504930967
+    },
+    "bulk_density_g_cm3": {
+      "min": 0.31,
+      "max": 2.2,
+      "mean": 1.377279263733103
+    },
+    "ec_ds_m": {
+      "min": 0.0,
+      "max": 44.4,
+      "mean": 0.2529814004376368
+    },
+    "year": {
+      "min": 1951.0,
+      "max": 2006.0,
+      "mean": 1986.3970599553606
+    },
+    "soc_percent": {
+      "min": 0.01,
+      "max": 46.83,
+      "mean": 1.260174001272627
+    },
+    "depth_mid_cm": {
+      "min": 0.5,
+      "max": 215.0,
+      "mean": 21.07271461416405
+    },
+    "depth_thickness_cm": {
+      "min": 1.0,
+      "max": 380.0,
+      "mean": 23.617985168874064
+    },
+    "n_percent": {
+      "min": 0.0,
+      "max": 2.94,
+      "mean": 0.09568392504930967
+    },
+    "cn_ratio": {
+      "min": 0.28571428571428575,
+      "max": 780.0,
+      "mean": 12.806884614482302
+    },
+    "texture_sum": {
+      "min": 94.99999999999999,
+      "max": 105.0,
+      "mean": 99.89903771903772
+    }
+  },
+  "source_distribution": {
+    "ISRIC_WoSIS_latest": 30881
+  },
+  "country_distribution_top20": {
+    "Australia": 3619,
+    "United Republic of Tanzania": 2702,
+    "Angola": 2549,
+    "Nigeria": 1917,
+    "Ethiopia": 1907,
+    "Botswana": 1635,
+    "Benin": 1604,
+    "Malawi": 1523,
+    "Cameroon": 1255,
+    "Mali": 1168,
+    "Burkina Faso": 1106,
+    "South Africa": 1045,
+    "Zambia": 990,
+    "Niger": 989,
+    "Democratic Republic of the Congo": 949,
+    "Kenya": 927,
+    "C\u00f4te d'Ivoire": 554,
+    "Mozambique": 511,
+    "Senegal": 471,
+    "Ghana": 410
+  },
+  "continent_distribution": {
+    "Africa": 26453,
+    "Oceania": 3619,
+    "South America": 385,
+    "Asia": 375,
+    "Antarctica": 49
+  },
+  "soil_texture_distribution": {
+    "sandy_loam": 6302,
+    "clay": 3616,
+    "sandy_clay_loam": 1971,
+    "loamy_sand": 1129,
+    "clay_loam": 982,
+    "sand": 910,
+    "loam": 849,
+    "sandy_clay": 493,
+    "silt_loam": 219,
+    "silty_clay_loam": 184,
+    "silty_clay": 179,
+    "silt": 1
+  },
+  "india_rows": 375,
+  "karnataka_bbox_rows": 69,
+  "rows_before_invalid_filter": 49162,
+  "invalid_value_counts": {
+    "orgc_nonpositive_or_null": 84,
+    "orgc_extreme_gt_600_gkg": 0,
+    "ph_out_of_range": 0
+  },
+  "topsoil_rows": 30881
+}

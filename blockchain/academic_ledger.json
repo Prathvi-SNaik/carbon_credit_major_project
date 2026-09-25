@@ -1,0 +1,19 @@
+{
+  "blocks": [
+    {
+      "txHash": "0x8dead9c2f551100443261c376fc7f54d2cc6ea086862b69dec16d5aae9f81707",
+      "blockNumber": 1,
+      "payloadHash": "6fe4c34a28a537f9fa18bccbbf5b5051344505295c77e817bfeba2ee2b501e5a",
+      "certificateHash": "0xfd10bbe9e421cebce26709316d2ee3ba409bdf6130f27e080140490f7ec2a2bd",
+      "payload": {
+        "creditId": "6ab64b743f4c4275f3f465dd",
+        "farmerId": "6ab639683f4c4275f3f4512b",
+        "quantity": 6.259,
+        "farmId": "6ab6396a3f4c4275f3f4514a",
+        "issuedAt": "2026-09-25T10:28:44.275Z"
+      },
+      "timestamp": "2026-09-25T10:28:44.305Z"
+    }
+  ],
+  "network": "academic-prototype"
+}

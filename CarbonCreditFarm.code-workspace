@@ -1,0 +1,6 @@
+{
+  "folders": [{ "name": "CarbonCreditFarm", "path": "." }],
+  "settings": {
+    "python.defaultInterpreterPath": "python"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "carboncreditfarm",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently -n api,ai,web -c green,blue,magenta \"npm run backend\" \"npm run ai\" \"npm run frontend\"",
+    "backend": "npm start --prefix backend",
+    "frontend": "npm run dev --prefix frontend",
+    "ai": "cd ai-module && PYTHONPATH=. python3 -m uvicorn app:app --host 0.0.0.0 --port 43122",
+    "postinstall": "npm install --prefix backend && npm install --prefix frontend"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}

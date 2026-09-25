@@ -1,0 +1,178 @@
+{
+  "model_name": "RandomForestRegressor",
+  "selected_from": "RandomForest",
+  "version": "soc-wosis-v1",
+  "target": "soc_percent",
+  "target_definition": "Soil organic carbon percent = WoSIS ORGC (g/kg) / 10. Not SOC change.",
+  "training_dataset": "ISRIC WoSIS-latest topsoil layers (upper depth \u2264 30 cm)",
+  "dataset_version": "wosis_latest_topsoil_v1",
+  "n_rows_used": 30881,
+  "n_train": 26248,
+  "n_val": 4633,
+  "n_test": 4633,
+  "features_numeric": [
+    "ph_h2o",
+    "clay_pct",
+    "sand_pct",
+    "silt_pct",
+    "n_g_kg",
+    "bulk_density_g_cm3",
+    "ec_ds_m",
+    "depth_mid_cm",
+    "depth_thickness_cm",
+    "latitude",
+    "longitude"
+  ],
+  "features_categorical": [
+    "soil_texture",
+    "continent",
+    "region_group"
+  ],
+  "metrics_test": {
+    "R2": 0.5689684696604125,
+    "MAE": 0.470251616390825,
+    "RMSE": 1.3608097881161376
+  },
+  "model_comparison": [
+    {
+      "model": "LinearRegression",
+      "dataset_version": "wosis_latest_topsoil_v1",
+      "features": "ph_h2o,clay_pct,sand_pct,silt_pct,n_g_kg,bulk_density_g_cm3,ec_ds_m,depth_mid_cm,depth_thickness_cm,latitude,longitude,soil_texture,continent,region_group",
+      "val_R2": 0.39480631366810026,
+      "val_MAE": 0.5961740351933954,
+      "val_RMSE": 1.3932231427111126,
+      "test_R2": 0.44397096541118564,
+      "test_MAE": 0.6216606017831071,
+      "test_RMSE": 1.5455805338497541,
+      "cv_R2_mean": 0.39633829915399,
+      "training_time_sec": 0.09,
+      "date": "2026-09-18",
+      "n_train": 21615,
+      "n_val": 4633,
+      "n_test": 4633
+    },
+    {
+      "model": "RandomForest",
+      "dataset_version": "wosis_latest_topsoil_v1",
+      "features": "ph_h2o,clay_pct,sand_pct,silt_pct,n_g_kg,bulk_density_g_cm3,ec_ds_m,depth_mid_cm,depth_thickness_cm,latitude,longitude,soil_texture,continent,region_group",
+      "val_R2": 0.49330222335999296,
+      "val_MAE": 0.4660226095693611,
+      "val_RMSE": 1.274817406913734,
+      "test_R2": 0.5662309653894635,
+      "test_MAE": 0.4836469460290082,
+      "test_RMSE": 1.3651242364586307,
+      "cv_R2_mean": 0.4833384298061045,
+      "training_time_sec": 3.02,
+      "date": "2026-09-18",
+      "n_train": 21615,
+      "n_val": 4633,
+      "n_test": 4633
+    },
+    {
+      "model": "GradientBoosting",
+      "dataset_version": "wosis_latest_topsoil_v1",
+      "features": "ph_h2o,clay_pct,sand_pct,silt_pct,n_g_kg,bulk_density_g_cm3,ec_ds_m,depth_mid_cm,depth_thickness_cm,latitude,longitude,soil_texture,continent,region_group",
+      "val_R2": 0.4322917953486264,
+      "val_MAE": 0.5221895192276953,
+      "val_RMSE": 1.3493855990936372,
+      "test_R2": 0.5644370406290974,
+      "test_MAE": 0.524998448387551,
+      "test_RMSE": 1.3679441742656269,
+      "cv_R2_mean": 0.43444345239785587,
+      "training_time_sec": 4.98,
+      "date": "2026-09-18",
+      "n_train": 21615,
+      "n_val": 4633,
+      "n_test": 4633
+    },
+    {
+      "model": "XGBoost",
+      "dataset_version": "wosis_latest_topsoil_v1",
+      "features": "ph_h2o,clay_pct,sand_pct,silt_pct,n_g_kg,bulk_density_g_cm3,ec_ds_m,depth_mid_cm,depth_thickness_cm,latitude,longitude,soil_texture,continent,region_group",
+      "val_R2": 0.4322720762984199,
+      "val_MAE": 0.4801641983146135,
+      "val_RMSE": 1.349409033994792,
+      "test_R2": 0.5295220172022435,
+      "test_MAE": 0.50074272061396,
+      "test_RMSE": 1.4217150356856614,
+      "cv_R2_mean": 0.39947245272934195,
+      "training_time_sec": 0.32,
+      "date": "2026-09-18",
+      "n_train": 21615,
+      "n_val": 4633,
+      "n_test": 4633
+    }
+  ],
+  "feature_importance_top15": [
+    {
+      "feature": "num__n_g_kg",
+      "importance": 0.5003346492212871
+    },
+    {
+      "feature": "num__longitude",
+      "importance": 0.16674897030615513
+    },
+    {
+      "feature": "num__latitude",
+      "importance": 0.14268621513730598
+    },
+    {
+      "feature": "num__depth_mid_cm",
+      "importance": 0.0967966954482598
+    },
+    {
+      "feature": "num__depth_thickness_cm",
+      "importance": 0.03564437819177642
+    },
+    {
+      "feature": "num__sand_pct",
+      "importance": 0.012030031953601996
+    },
+    {
+      "feature": "num__ph_h2o",
+      "importance": 0.011303520047586732
+    },
+    {
+      "feature": "num__silt_pct",
+      "importance": 0.00941599476394188
+    },
+    {
+      "feature": "num__clay_pct",
+      "importance": 0.009264674404450132
+    },
+    {
+      "feature": "num__bulk_density_g_cm3",
+      "importance": 0.005267940447016336
+    },
+    {
+      "feature": "cat__soil_texture_unknown",
+      "importance": 0.0017215378323691471
+    },
+    {
+      "feature": "cat__soil_texture_loamy_sand",
+      "importance": 0.0015649515498664922
+    },
+    {
+      "feature": "cat__soil_texture_clay",
+      "importance": 0.0011389532841753348
+    },
+    {
+      "feature": "cat__region_group_South America",
+      "importance": 0.0010432886346680161
+    },
+    {
+      "feature": "cat__continent_South America",
+      "importance": 0.0009476879878096657
+    }
+  ],
+  "training_date": "2026-09-18T08:26:15.307094+00:00",
+  "split_strategy": "profile_id-aware random split 70/15/15 plus GroupKFold on profiles",
+  "preprocessing": "median impute + scale numerics; most-frequent + one-hot categoricals",
+  "limitations": [
+    "WoSIS has no paired before/after farm SOC; change is computed in the app from farmer stages.",
+    "Crop, irrigation and tillage are not WoSIS laboratory fields and are not used as model features.",
+    "Farmer NPK in kg/ha is not equivalent to total N (g/kg) and is not substituted.",
+    "Spatial coverage is global; India/Karnataka density depends on contributed profiles."
+  ],
+  "data_label": "REAL DATA"
+}

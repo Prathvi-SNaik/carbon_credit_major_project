@@ -1,0 +1,13 @@
+{
+  "citation": "Batjes NH, Calisto L, de Sousa LM. WoSIS-latest. ISRIC \u2014 World Soil Information.",
+  "wfs": "https://maps.isric.org/mapserv",
+  "graphql": "https://graphql.isric.org/wosis/graphql",
+  "label": "REAL DATA",
+  "units": {
+    "orgc": "g/kg",
+    "n": "g/kg Kjeldahl",
+    "texture": "mass %",
+    "bd": "g/cm3 oven dry",
+    "ph": "pH water"
+  }
+}
