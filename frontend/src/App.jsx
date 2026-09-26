@@ -785,34 +785,15 @@ function SoilForm({ farmId, status }) {
   const [stage, setStage] = useState("BEFORE_FARMING");
   const [live, setLive] = useState(null);
   const [readings, setReadings] = useState([]);
-  const [properties, setProperties] = useState(null);
-  const [propertyError, setPropertyError] = useState("");
   const [msg, setMsg] = useState("");
   const [busy, setBusy] = useState(false);
+  const stageReading = readings.find((reading) => reading.stage === stage);
   const refresh = () => {
     api("/soil-readings").then((d) => setReadings(d.readings));
     api(`/iot/latest?farmId=${farmId || ""}`).then((d) => setLive(d.live)).catch(() => {});
   };
   useEffect(() => { refresh(); const t = setInterval(refresh, 4000); return () => clearInterval(t); }, [farmId]);
-  useEffect(() => {
-    if (status !== "APPROVED" || !farmId || live?.ph == null) {
-      setProperties(null);
-      setPropertyError("");
-      return;
-    }
-    let current = true;
-    setProperties(null);
-    setPropertyError("");
-    api("/soil-readings/from-sensors", {
-      method: "POST",
-      body: { farmId, stage, soilDepth: 15, preview: true },
-    }).then((result) => {
-      if (current) setProperties(result.properties);
-    }).catch((ex) => {
-      if (current) setPropertyError(ex.message);
-    });
-    return () => { current = false; };
-  }, [farmId, stage, status, live?.ph, live?.moisture, live?.temperature]);
+  useEffect(() => { setMsg(""); }, [stage]);
 
   async function simulate() {
     setBusy(true);
@@ -834,8 +815,27 @@ function SoilForm({ farmId, status }) {
     setMsg("");
     try {
       const r = await api("/soil-readings/from-sensors", { method: "POST", body: { farmId, stage, soilDepth: 15 } });
-      setProperties(r.filled.properties || r.filled);
+      setReadings((existing) => [r.reading, ...existing.filter((item) => item._id !== r.reading._id)]);
       setMsg(`Saved ${stage}: Arduino pH ${r.live.ph}, moisture ${r.live.moisture}%, ${r.live.temperature}Â°C. Location-based model filled EC/NPK/SOC.`);
+      refresh();
+    } catch (ex) {
+      setMsg(ex.message);
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function takeDemoReading() {
+    setBusy(true);
+    setMsg("");
+    try {
+      const result = await api("/soil-readings/take-reading", {
+        method: "POST",
+        body: { farmId, stage, soilDepth: 15 },
+      });
+      setLive(result.live);
+      setReadings((existing) => [result.reading, ...existing.filter((item) => item._id !== result.reading._id)]);
+      setMsg(`Saved one demo ${stage.replace("_", " ")} sample: pH ${result.live.ph}, moisture ${result.live.moisture}%, ${result.live.temperature}\u00B0C. ML filled EC, NPK and SOC.`);
       refresh();
     } catch (ex) {
       setMsg(ex.message);
@@ -865,29 +865,35 @@ function SoilForm({ farmId, status }) {
       </div>
       <div className="role-tabs">
         {["BEFORE_FARMING", "AFTER_FARMING"].map((s) => (
-          <button type="button" key={s} className={stage === s ? "on" : ""} onClick={() => setStage(s)}>{s.replace("_", " ")}</button>
+          <button type="button" key={s} className={stage === s ? "on" : ""} onClick={() => { setStage(s); setMsg(""); }}>{s.replace("_", " ")}</button>
         ))}
       </div>
       <div className="card inner">
-        <h3>Automatic estimates — {stage.replace("_", " ")}</h3>
-        <p className="muted">Based on mapped farm location, soil type, season, and latest Arduino pH, moisture, and temperature. Estimates are not lab results.</p>
-        {properties ? (
-          <div className="stats">
-            <Stat n={`${Number(properties.ec).toFixed(2)} dS/m`} l="EC estimate" />
-            <Stat n={`${Number(properties.nitrogen).toFixed(1)} kg/ha`} l="N estimate" />
-            <Stat n={`${Number(properties.phosphorus).toFixed(1)} kg/ha`} l="P estimate" />
-            <Stat n={`${Number(properties.potassium).toFixed(1)} kg/ha`} l="K estimate" />
-          </div>
-        ) : (
-          <p className={propertyError ? "warn" : "muted"}>{propertyError || (status !== "APPROVED" ? "Admin approval is required to generate soil estimates." : live?.ph == null ? "Waiting for an Arduino reading. Connect the station or press Simulate Arduino." : "Calculating estimates…")}</p>
+        <h3>{stage.replace("_", " ")} soil sample</h3>
+        <p className="muted">Each stage has its own saved sample. Estimates are model outputs, not laboratory results.</p>
+        <div className="stats">
+          <Stat n={stageReading?.moisture != null ? `${stageReading.moisture}%` : "--"} l="Soil moisture" />
+          <Stat n={stageReading?.temperature != null ? `${stageReading.temperature}\u00B0C` : "--"} l="Soil temperature" />
+          <Stat n={stageReading?.humidity != null ? `${stageReading.humidity}%` : "--"} l="Humidity" />
+          <Stat n={stageReading?.ph ?? "--"} l="pH" />
+          <Stat n={stageReading?.nitrogen != null ? `${Number(stageReading.nitrogen).toFixed(1)} mg/kg` : "--"} l="Nitrogen" />
+          <Stat n={stageReading?.phosphorus != null ? `${Number(stageReading.phosphorus).toFixed(1)} mg/kg` : "--"} l="Phosphorus" />
+          <Stat n={stageReading?.potassium != null ? `${Number(stageReading.potassium).toFixed(1)} mg/kg` : "--"} l="Potassium" />
+        </div>
+        {stageReading && (
+          <p className="muted">Captured {new Date(stageReading.readingDate || stageReading.createdAt).toLocaleString()} | EC {Number(stageReading.ec).toFixed(2)} dS/m | SOC {Number(stageReading.measuredSocPercent).toFixed(3)}%</p>
         )}
+        <button className="btn" type="button" disabled={busy || status !== "APPROVED"} onClick={takeDemoReading}>
+          {stageReading ? "Take Reading Again" : "Take Reading"}
+        </button>
+        <p className="muted">Demo backup: one click saves one new sample. Arduino readings remain available below.</p>
       </div>
       <form onSubmit={capture}>
         <button className="btn" type="submit" disabled={busy || status !== "APPROVED"}>Save {stage.replace("_", " ")} from Arduino + ML</button>
       </form>
       {msg && <p className={String(msg).toLowerCase().includes("save") || String(msg).includes("Simulated") ? "ok" : "error"}>{msg}</p>}
       <table>
-        <thead><tr><th>Stage</th><th>Source</th><th>pH</th><th>Moist</th><th>Temp</th><th>EC</th><th>N</th><th>P</th><th>K</th><th>SOC</th></tr></thead>
+        <thead><tr><th>Stage</th><th>Source</th><th>pH</th><th>Moist</th><th>Temp</th><th>Humidity</th><th>EC</th><th>N</th><th>P</th><th>K</th><th>SOC</th></tr></thead>
         <tbody>
           {readings.map((r) => (
             <tr key={r._id}>
@@ -896,6 +902,7 @@ function SoilForm({ farmId, status }) {
               <td>{r.ph}</td>
               <td>{r.moisture}</td>
               <td>{r.temperature}</td>
+              <td>{r.humidity ?? "--"}</td>
               <td>{r.ec}</td>
               <td>{r.nitrogen}</td>
               <td>{r.phosphorus}</td>

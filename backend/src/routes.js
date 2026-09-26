@@ -387,6 +387,101 @@ router.post("/iot/simulate", auth, roles("FARMER"), async (req, res) => {
   res.json({ live, note: "Simulated Arduino packet (use USB serial bridge when the board is plugged in)." });
 });
 
+router.post("/soil-readings/take-reading", auth, roles("FARMER"), async (req, res) => {
+  if (req.user.verificationStatus !== "APPROVED") {
+    return res.status(403).json({ error: "Admin must approve your farm before soil readings." });
+  }
+  const farm = req.body.farmId
+    ? await Farm.findOne({ _id: req.body.farmId, farmerId: req.user._id })
+    : await Farm.findOne({ farmerId: req.user._id }).sort({ updatedAt: -1 });
+  if (!farm) return res.status(404).json({ error: "Save farm details first." });
+
+  // Create one plausible backup sensor packet, then send it through the same
+  // place-based ML and SoilReading persistence flow used for Arduino samples.
+  const isAfter = req.body.stage === "AFTER_FARMING";
+  const sample = isAfter
+    ? {
+        moisture: Number((61 + Math.random() * 6).toFixed(1)),
+        temperature: Number((26.1 + Math.random() * 1.4).toFixed(1)),
+        humidity: Number((69 + Math.random() * 6).toFixed(1)),
+        ph: Number((6.6 + Math.random() * 0.4).toFixed(2)),
+      }
+    : {
+        moisture: Number((55 + Math.random() * 6).toFixed(1)),
+        temperature: Number((26.8 + Math.random() * 1.4).toFixed(1)),
+        humidity: Number((65 + Math.random() * 6).toFixed(1)),
+        ph: Number((6.3 + Math.random() * 0.4).toFixed(2)),
+      };
+  const live = await ArduinoLive.create({
+    farmId: farm._id,
+    farmerId: req.user._id,
+    deviceId: "DEMO-SOIL-SAMPLE",
+    ...sample,
+    raw: { simulated: true, singleSample: true, stage: req.body.stage || "BEFORE_FARMING", source: "Take Reading demo backup" },
+    receivedAt: new Date(),
+  });
+
+  const boundary = await FarmBoundary.findOne({ farmId: farm._id });
+  const lat = boundary?.points?.[0]?.lat ?? req.body.latitude;
+  const lng = boundary?.points?.[0]?.lng ?? req.body.longitude;
+  let filled;
+  try {
+    const response = await fetch(`${AI_URL}/ai/fill-properties`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        ph: live.ph,
+        moisture: live.moisture,
+        temperature: live.temperature,
+        latitude: lat,
+        longitude: lng,
+        state: farm.state,
+        district: farm.district,
+        soil_type: farm.soilType,
+        farming_practice: farm.farmingPractice,
+        irrigation: farm.irrigationMethod,
+        crop: farm.cropType,
+        month: new Date().getMonth() + 1,
+        soil_depth: req.body.soilDepth || 15,
+      }),
+    });
+    filled = await response.json();
+    if (!response.ok) return res.status(502).json({ error: filled.detail || filled.error || "ML fill service error" });
+  } catch (error) {
+    return res.status(503).json({ error: "AI service is not running", detail: String(error) });
+  }
+
+  const props = filled.properties || filled;
+  const reading = await SoilReading.create({
+    farmId: farm._id,
+    farmerId: req.user._id,
+    stage: req.body.stage || "BEFORE_FARMING",
+    inputMethod: "IOT",
+    ph: live.ph,
+    moisture: live.moisture,
+    temperature: live.temperature,
+    humidity: live.humidity,
+    ec: props.ec,
+    nitrogen: props.nitrogen,
+    phosphorus: props.phosphorus,
+    potassium: props.potassium,
+    soilDepth: req.body.soilDepth || 15,
+    measuredSocPercent: props.soc_percent,
+    latitude: lat,
+    longitude: lng,
+    deviceId: live.deviceId,
+    sources: {
+      arduino: ["ph", "moisture", "temperature"],
+      ml: ["ec", "nitrogen", "phosphorus", "potassium", "clay_pct", "sand_pct", "silt_pct", "soc_percent"],
+      place: { state: farm.state, district: farm.district, latitude: lat, longitude: lng, soilType: farm.soilType },
+      model: filled.model_name,
+    },
+    dataLabel: "SINGLE DEMO SAMPLE + ML PLACE-BASED FILL",
+    readingDate: new Date(),
+  });
+  res.json({ reading, live, filled, note: "One demo soil sample saved through the IoT and ML flow." });
+});
+
 router.post("/soil-readings/from-sensors", auth, roles("FARMER"), async (req, res) => {
   if (req.user.verificationStatus !== "APPROVED") {
     return res.status(403).json({ error: "Admin must approve your farm before soil readings." });
