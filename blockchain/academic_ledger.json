@@ -13,6 +13,118 @@
         "issuedAt": "2026-09-25T10:28:44.275Z"
       },
       "timestamp": "2026-09-25T10:28:44.305Z"
+    },
+    {
+      "txHash": "0xf97567bed30bfd7020f407566fffce9b17c208e9142d2b71013dc2f76c071715",
+      "blockNumber": 2,
+      "payloadHash": "ad1e95ce8461558e488d1edbea6c0093befb600b97fafcc5d384d199879b8943",
+      "certificateHash": "0x0bf4475e3fca5a064b75456e714ba946b09914218d5441c94d02a64ee156e2e7",
+      "payload": {
+        "creditId": "6ab64b733f4c4275f3f465ce",
+        "farmerId": "6ab639683f4c4275f3f4512b",
+        "quantity": 6.259,
+        "farmId": "6ab6396a3f4c4275f3f4514a",
+        "issuedAt": "2026-09-25T15:04:05.748Z"
+      },
+      "timestamp": "2026-09-25T15:04:05.781Z"
+    },
+    {
+      "txHash": "0x23b6989f1193c300544d8230e21b32b23ac52054d7d5adfd59a46611e007035c",
+      "blockNumber": 3,
+      "payloadHash": "4f030acec575e5e2e97dd5ec338629a1442d20c42c6266e2f0b5ab0a0ca45b97",
+      "certificateHash": "0x58447e53e8ebc1c16c7d6b128f9806b0ebd39d24baf1d6a02acaa6ba064929da",
+      "payload": {
+        "creditId": "6ac33e557c59177afbcc0cb3",
+        "farmerId": "6ac33ced7c59177afbcc0993",
+        "quantity": 5.925,
+        "farmId": "6ac33cf27c59177afbcc09b4",
+        "issuedAt": "2026-10-05T06:07:04.335Z"
+      },
+      "timestamp": "2026-10-05T06:07:04.377Z"
+    },
+    {
+      "txHash": "0xce65ddcbafd9c57dace76188c82b862a191313a7d8fb5827f66994db0080b560",
+      "blockNumber": 4,
+      "payloadHash": "c57659ac184d9e780b23b5468c94da01a76a855b3e33d5f6c4eb8407fb02754c",
+      "certificateHash": "0xead1216b03c6cf4628ef4414e6be22ee181ade7464b9497c5613bd7bb644ff8c",
+      "payload": {
+        "creditId": "6ac3230e7c59177afbcc08a1",
+        "farmerId": "6ac320ec7c59177afbcc0669",
+        "quantity": 2.222,
+        "farmId": "6ac320f97c59177afbcc068a",
+        "issuedAt": "2026-10-05T06:07:07.536Z"
+      },
+      "timestamp": "2026-10-05T06:07:07.541Z"
+    },
+    {
+      "txHash": "0x876f32f153f21b40e0e02029789e9361e38e7360657fb10d64a5e67a39385356",
+      "blockNumber": 5,
+      "payloadHash": "3a2117e734b193e0e4575c95a7505093206009b1f1be0a3a4ea4f0c5902a279b",
+      "certificateHash": "0x7956cb65d3286050a3ccc724c4b9b0d57da835fedc785c5b56bb08d5c1855b66",
+      "payload": {
+        "creditId": "6ac3224e7c59177afbcc0816",
+        "farmerId": "6ac320ec7c59177afbcc0669",
+        "quantity": 2.222,
+        "farmId": "6ac320f97c59177afbcc068a",
+        "issuedAt": "2026-10-05T06:07:08.404Z"
+      },
+      "timestamp": "2026-10-05T06:07:08.409Z"
+    },
+    {
+      "txHash": "0x8ed1f744ab1ce0aea827a1ce64d7dd030e2dcb4fdf0575c40a6b851ec6b3cce1",
+      "blockNumber": 6,
+      "payloadHash": "b370f81de33191579f8e131b022d8e778abdd603eea2721a9546a5cf22c760ff",
+      "certificateHash": "0xde76e757f535ec1641455ee9c55e02185734c4b5409b5689d101b69c0631b066",
+      "payload": {
+        "creditId": "6ac322147c59177afbcc07a9",
+        "farmerId": "6ac320ec7c59177afbcc0669",
+        "quantity": 0,
+        "farmId": "6ac320f97c59177afbcc068a",
+        "issuedAt": "2026-10-05T06:07:09.499Z"
+      },
+      "timestamp": "2026-10-05T06:07:09.504Z"
+    },
+    {
+      "txHash": "0x00a3ba540e24f5b4170ea5f9e250101bf5294bd2627e2b8d91668131eac1faee",
+      "blockNumber": 7,
+      "payloadHash": "f899be4623a7e959bb9075a442aac3f610b2db10af799fac7ad579696a829b2b",
+      "certificateHash": "0xa9e26a7e23cb6e6005b39e1180a152466e40e6a4ca4f88313d45891653b9a26c",
+      "payload": {
+        "creditId": "6ac4ae301c4dc694f39405d7",
+        "farmerId": "6ac4ac841c4dc694f394042e",
+        "quantity": 1037.444,
+        "farmId": "6ac4ac9b1c4dc694f394044f",
+        "issuedAt": "2026-10-06T08:16:53.868Z"
+      },
+      "timestamp": "2026-10-06T08:16:53.870Z"
+    },
+    {
+      "txHash": "0xc1808f11eeccff8ee29aba54fa277066b9e106b91541dc16828dc9b2590057e6",
+      "blockNumber": 8,
+      "payloadHash": "1b6550eba1fc5aa2eea7b842c70e9b387f23cc0660d41cf2703bb22d306c038a",
+      "certificateHash": "0x85457c38b4f121d72dd29ce993c43d6e909182b013dc597a1e1dd4ba295f850e",
+      "payload": {
+        "creditId": "6ac4c9881c4dc694f3940d04",
+        "farmerId": "6ac4c8901c4dc694f3940bbe",
+        "quantity": 5.613,
+        "farmId": "6ac4c8aa1c4dc694f3940bdf",
+        "issuedAt": "2026-10-06T10:13:28.274Z"
+      },
+      "timestamp": "2026-10-06T10:13:28.280Z"
+    },
+    {
+      "txHash": "0x359dca69826e6e95405eba45439b55c289e40b37a35c637760fb891daa2295db",
+      "blockNumber": 9,
+      "payloadHash": "b09662132cc9022feb78fd0a064257cb5a9f6ef4b7fcb2a95cf3387c32804eb2",
+      "certificateHash": "0x286b13376f2105788f7dec64912ce21d998a26b839435e703799d7083f3ca1b9",
+      "payload": {
+        "creditId": "6ac4e0001c4dc694f3940eef",
+        "farmerId": "6ac4de121c4dc694f3940d8e",
+        "quantity": 2.035,
+        "farmId": "6ac4deb81c4dc694f3940daf",
+        "issuedAt": "2026-10-06T11:49:20.124Z"
+      },
+      "timestamp": "2026-10-06T11:49:20.130Z"
     }
   ],
   "network": "academic-prototype"
